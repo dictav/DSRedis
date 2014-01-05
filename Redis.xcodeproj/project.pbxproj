@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A92BE5501879A2810057B8F4 /* RedisExistsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */; };
+		A92BE5511879A2810057B8F4 /* RedisScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */; };
+		A92BE5751879A2AE0057B8F4 /* dict.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE55E1879A2AE0057B8F4 /* dict.c */; };
+		A92BE57B1879A2AE0057B8F4 /* hiredis.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE5671879A2AE0057B8F4 /* hiredis.c */; };
+		A92BE57D1879A2AE0057B8F4 /* net.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE56A1879A2AE0057B8F4 /* net.c */; };
+		A92BE57F1879A2AE0057B8F4 /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE56D1879A2AE0057B8F4 /* sds.c */; };
 		A94DABD71879967600DE1AA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD61879967600DE1AA8 /* Foundation.framework */; };
 		A94DABDC1879967600DE1AA8 /* Redis.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A94DABDB1879967600DE1AA8 /* Redis.h */; };
 		A94DABDE1879967600DE1AA8 /* Redis.m in Sources */ = {isa = PBXBuildFile; fileRef = A94DABDD1879967600DE1AA8 /* Redis.m */; };
@@ -15,7 +21,7 @@
 		A94DABE81879967700DE1AA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABE71879967700DE1AA8 /* UIKit.framework */; };
 		A94DABEB1879967700DE1AA8 /* libRedis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD31879967600DE1AA8 /* libRedis.a */; };
 		A94DABF11879967700DE1AA8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A94DABEF1879967700DE1AA8 /* InfoPlist.strings */; };
-		A94DABF31879967700DE1AA8 /* RedisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A94DABF21879967700DE1AA8 /* RedisTests.m */; };
+		A94DABF31879967700DE1AA8 /* ARedisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A94DABF21879967700DE1AA8 /* ARedisTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +48,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisExistsTests.m; sourceTree = "<group>"; };
+		A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisScriptTests.m; sourceTree = "<group>"; };
+		A92BE55E1879A2AE0057B8F4 /* dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dict.c; sourceTree = "<group>"; };
+		A92BE55F1879A2AE0057B8F4 /* dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dict.h; sourceTree = "<group>"; };
+		A92BE5661879A2AE0057B8F4 /* fmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmacros.h; sourceTree = "<group>"; };
+		A92BE5671879A2AE0057B8F4 /* hiredis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hiredis.c; sourceTree = "<group>"; };
+		A92BE5681879A2AE0057B8F4 /* hiredis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiredis.h; sourceTree = "<group>"; };
+		A92BE56A1879A2AE0057B8F4 /* net.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = net.c; sourceTree = "<group>"; };
+		A92BE56B1879A2AE0057B8F4 /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
+		A92BE56D1879A2AE0057B8F4 /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
+		A92BE56E1879A2AE0057B8F4 /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
 		A94DABD31879967600DE1AA8 /* libRedis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRedis.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94DABD61879967600DE1AA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A94DABDA1879967600DE1AA8 /* Redis-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Redis-Prefix.pch"; sourceTree = "<group>"; };
@@ -52,7 +69,7 @@
 		A94DABE71879967700DE1AA8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A94DABEE1879967700DE1AA8 /* RedisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RedisTests-Info.plist"; sourceTree = "<group>"; };
 		A94DABF01879967700DE1AA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A94DABF21879967700DE1AA8 /* RedisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedisTests.m; sourceTree = "<group>"; };
+		A94DABF21879967700DE1AA8 /* ARedisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARedisTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +95,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A92BE5521879A2AE0057B8F4 /* hiredis */ = {
+			isa = PBXGroup;
+			children = (
+				A92BE55E1879A2AE0057B8F4 /* dict.c */,
+				A92BE55F1879A2AE0057B8F4 /* dict.h */,
+				A92BE5661879A2AE0057B8F4 /* fmacros.h */,
+				A92BE5671879A2AE0057B8F4 /* hiredis.c */,
+				A92BE5681879A2AE0057B8F4 /* hiredis.h */,
+				A92BE56A1879A2AE0057B8F4 /* net.c */,
+				A92BE56B1879A2AE0057B8F4 /* net.h */,
+				A92BE56D1879A2AE0057B8F4 /* sds.c */,
+				A92BE56E1879A2AE0057B8F4 /* sds.h */,
+			);
+			path = hiredis;
+			sourceTree = "<group>";
+		};
 		A94DABCA1879967600DE1AA8 = {
 			isa = PBXGroup;
 			children = (
+				A92BE5521879A2AE0057B8F4 /* hiredis */,
 				A94DABD81879967600DE1AA8 /* Redis */,
 				A94DABEC1879967700DE1AA8 /* RedisTests */,
 				A94DABD51879967600DE1AA8 /* Frameworks */,
@@ -128,7 +162,9 @@
 		A94DABEC1879967700DE1AA8 /* RedisTests */ = {
 			isa = PBXGroup;
 			children = (
-				A94DABF21879967700DE1AA8 /* RedisTests.m */,
+				A94DABF21879967700DE1AA8 /* ARedisTests.m */,
+				A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */,
+				A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */,
 				A94DABED1879967700DE1AA8 /* Supporting Files */,
 			);
 			path = RedisTests;
@@ -232,7 +268,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A94DABF31879967700DE1AA8 /* RedisTests.m in Sources */,
+				A92BE5751879A2AE0057B8F4 /* dict.c in Sources */,
+				A94DABF31879967700DE1AA8 /* ARedisTests.m in Sources */,
+				A92BE5511879A2810057B8F4 /* RedisScriptTests.m in Sources */,
+				A92BE57B1879A2AE0057B8F4 /* hiredis.c in Sources */,
+				A92BE5501879A2810057B8F4 /* RedisExistsTests.m in Sources */,
+				A92BE57F1879A2AE0057B8F4 /* sds.c in Sources */,
+				A92BE57D1879A2AE0057B8F4 /* net.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +408,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"TEST=1",
 				);
 				INFOPLIST_FILE = "RedisTests/RedisTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,6 +452,7 @@
 				A94DABF81879967700DE1AA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A94DABF91879967700DE1AA8 /* Build configuration list for PBXNativeTarget "RedisTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +461,7 @@
 				A94DABFB1879967700DE1AA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

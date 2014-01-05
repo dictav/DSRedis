@@ -7,17 +7,23 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "Redis.h"
 
-@interface RedisTests : XCTestCase
+@interface ARedisTests : XCTestCase
 
 @end
 
-@implementation RedisTests
+@implementation ARedisTests
+{
+    Redis *redis;
+}
 
 - (void)setUp
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    redis = [[Redis alloc] initWithServer:@"localhost" port:11235 password:nil];
+    [Redis setSharedRedis:redis];
 }
 
 - (void)tearDown
@@ -26,9 +32,9 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testPing
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    XCTAssertTrue([redis ping]);
 }
 
 @end
