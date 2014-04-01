@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A92BE5501879A2810057B8F4 /* RedisExistsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */; };
-		A92BE5511879A2810057B8F4 /* RedisScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */; };
+		A91329B218E90E7E0039B81D /* DSRedis.m in Sources */ = {isa = PBXBuildFile; fileRef = A91329B118E90E7E0039B81D /* DSRedis.m */; };
 		A92BE5751879A2AE0057B8F4 /* dict.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE55E1879A2AE0057B8F4 /* dict.c */; };
 		A92BE57B1879A2AE0057B8F4 /* hiredis.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE5671879A2AE0057B8F4 /* hiredis.c */; };
 		A92BE57D1879A2AE0057B8F4 /* net.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE56A1879A2AE0057B8F4 /* net.c */; };
 		A92BE57F1879A2AE0057B8F4 /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = A92BE56D1879A2AE0057B8F4 /* sds.c */; };
 		A94DABD71879967600DE1AA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD61879967600DE1AA8 /* Foundation.framework */; };
-		A94DABDC1879967600DE1AA8 /* Redis.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A94DABDB1879967600DE1AA8 /* Redis.h */; };
-		A94DABDE1879967600DE1AA8 /* Redis.m in Sources */ = {isa = PBXBuildFile; fileRef = A94DABDD1879967600DE1AA8 /* Redis.m */; };
 		A94DABE51879967700DE1AA8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABE41879967700DE1AA8 /* XCTest.framework */; };
 		A94DABE61879967700DE1AA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD61879967600DE1AA8 /* Foundation.framework */; };
 		A94DABE81879967700DE1AA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABE71879967700DE1AA8 /* UIKit.framework */; };
-		A94DABEB1879967700DE1AA8 /* libRedis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD31879967600DE1AA8 /* libRedis.a */; };
-		A94DABF11879967700DE1AA8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A94DABEF1879967700DE1AA8 /* InfoPlist.strings */; };
-		A94DABF31879967700DE1AA8 /* ARedisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A94DABF21879967700DE1AA8 /* ARedisTests.m */; };
+		A94DABEB1879967700DE1AA8 /* libDSRedis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94DABD31879967600DE1AA8 /* libDSRedis.a */; };
+		A9598E1018E90DFC00ECF4D9 /* ARedisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9598E0A18E90DFC00ECF4D9 /* ARedisTests.m */; };
+		A9598E1118E90DFC00ECF4D9 /* DSRedisTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9598E0B18E90DFC00ECF4D9 /* DSRedisTests-Info.plist */; };
+		A9598E1218E90DFC00ECF4D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9598E0C18E90DFC00ECF4D9 /* InfoPlist.strings */; };
+		A9598E1318E90DFC00ECF4D9 /* RedisExistsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */; };
+		A9598E1418E90DFC00ECF4D9 /* RedisScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9598E0F18E90DFC00ECF4D9 /* RedisScriptTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,15 +41,15 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A94DABDC1879967600DE1AA8 /* Redis.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisExistsTests.m; sourceTree = "<group>"; };
-		A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisScriptTests.m; sourceTree = "<group>"; };
+		A91329AF18E90E7E0039B81D /* DSRedis-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DSRedis-Prefix.pch"; sourceTree = "<group>"; };
+		A91329B018E90E7E0039B81D /* DSRedis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSRedis.h; sourceTree = "<group>"; };
+		A91329B118E90E7E0039B81D /* DSRedis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRedis.m; sourceTree = "<group>"; };
 		A92BE55E1879A2AE0057B8F4 /* dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dict.c; sourceTree = "<group>"; };
 		A92BE55F1879A2AE0057B8F4 /* dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dict.h; sourceTree = "<group>"; };
 		A92BE5661879A2AE0057B8F4 /* fmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmacros.h; sourceTree = "<group>"; };
@@ -59,17 +59,16 @@
 		A92BE56B1879A2AE0057B8F4 /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
 		A92BE56D1879A2AE0057B8F4 /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		A92BE56E1879A2AE0057B8F4 /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
-		A94DABD31879967600DE1AA8 /* libRedis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRedis.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A94DABD31879967600DE1AA8 /* libDSRedis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDSRedis.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94DABD61879967600DE1AA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A94DABDA1879967600DE1AA8 /* Redis-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Redis-Prefix.pch"; sourceTree = "<group>"; };
-		A94DABDB1879967600DE1AA8 /* Redis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Redis.h; sourceTree = "<group>"; };
-		A94DABDD1879967600DE1AA8 /* Redis.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Redis.m; sourceTree = "<group>"; };
-		A94DABE31879967700DE1AA8 /* RedisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A94DABE31879967700DE1AA8 /* DSRedisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSRedisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A94DABE41879967700DE1AA8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A94DABE71879967700DE1AA8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		A94DABEE1879967700DE1AA8 /* RedisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RedisTests-Info.plist"; sourceTree = "<group>"; };
-		A94DABF01879967700DE1AA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A94DABF21879967700DE1AA8 /* ARedisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARedisTests.m; sourceTree = "<group>"; };
+		A9598E0A18E90DFC00ECF4D9 /* ARedisTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARedisTests.m; sourceTree = "<group>"; };
+		A9598E0B18E90DFC00ECF4D9 /* DSRedisTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DSRedisTests-Info.plist"; sourceTree = "<group>"; };
+		A9598E0D18E90DFC00ECF4D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisExistsTests.m; sourceTree = "<group>"; };
+		A9598E0F18E90DFC00ECF4D9 /* RedisScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisScriptTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +87,23 @@
 				A94DABE51879967700DE1AA8 /* XCTest.framework in Frameworks */,
 				A94DABE81879967700DE1AA8 /* UIKit.framework in Frameworks */,
 				A94DABE61879967700DE1AA8 /* Foundation.framework in Frameworks */,
-				A94DABEB1879967700DE1AA8 /* libRedis.a in Frameworks */,
+				A94DABEB1879967700DE1AA8 /* libDSRedis.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A91329AE18E90E7E0039B81D /* DSRedis */ = {
+			isa = PBXGroup;
+			children = (
+				A91329AF18E90E7E0039B81D /* DSRedis-Prefix.pch */,
+				A91329B018E90E7E0039B81D /* DSRedis.h */,
+				A91329B118E90E7E0039B81D /* DSRedis.m */,
+			);
+			path = DSRedis;
+			sourceTree = "<group>";
+		};
 		A92BE5521879A2AE0057B8F4 /* hiredis */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				A92BE5521879A2AE0057B8F4 /* hiredis */,
-				A94DABD81879967600DE1AA8 /* Redis */,
-				A94DABEC1879967700DE1AA8 /* RedisTests */,
+				A91329AE18E90E7E0039B81D /* DSRedis */,
+				A9598E0918E90DFC00ECF4D9 /* DSRedisTests */,
 				A94DABD51879967600DE1AA8 /* Frameworks */,
 				A94DABD41879967600DE1AA8 /* Products */,
 			);
@@ -125,8 +134,8 @@
 		A94DABD41879967600DE1AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A94DABD31879967600DE1AA8 /* libRedis.a */,
-				A94DABE31879967700DE1AA8 /* RedisTests.xctest */,
+				A94DABD31879967600DE1AA8 /* libDSRedis.a */,
+				A94DABE31879967700DE1AA8 /* DSRedisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,50 +150,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A94DABD81879967600DE1AA8 /* Redis */ = {
+		A9598E0918E90DFC00ECF4D9 /* DSRedisTests */ = {
 			isa = PBXGroup;
 			children = (
-				A94DABDB1879967600DE1AA8 /* Redis.h */,
-				A94DABDD1879967600DE1AA8 /* Redis.m */,
-				A94DABD91879967600DE1AA8 /* Supporting Files */,
+				A9598E0A18E90DFC00ECF4D9 /* ARedisTests.m */,
+				A9598E0B18E90DFC00ECF4D9 /* DSRedisTests-Info.plist */,
+				A9598E0C18E90DFC00ECF4D9 /* InfoPlist.strings */,
+				A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */,
+				A9598E0F18E90DFC00ECF4D9 /* RedisScriptTests.m */,
 			);
-			path = Redis;
-			sourceTree = "<group>";
-		};
-		A94DABD91879967600DE1AA8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A94DABDA1879967600DE1AA8 /* Redis-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A94DABEC1879967700DE1AA8 /* RedisTests */ = {
-			isa = PBXGroup;
-			children = (
-				A94DABF21879967700DE1AA8 /* ARedisTests.m */,
-				A92BE54E1879A2810057B8F4 /* RedisExistsTests.m */,
-				A92BE54F1879A2810057B8F4 /* RedisScriptTests.m */,
-				A94DABED1879967700DE1AA8 /* Supporting Files */,
-			);
-			path = RedisTests;
-			sourceTree = "<group>";
-		};
-		A94DABED1879967700DE1AA8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A94DABEE1879967700DE1AA8 /* RedisTests-Info.plist */,
-				A94DABEF1879967700DE1AA8 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			path = DSRedisTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A94DABD21879967600DE1AA8 /* Redis */ = {
+		A94DABD21879967600DE1AA8 /* DSRedis */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A94DABF61879967700DE1AA8 /* Build configuration list for PBXNativeTarget "Redis" */;
+			buildConfigurationList = A94DABF61879967700DE1AA8 /* Build configuration list for PBXNativeTarget "DSRedis" */;
 			buildPhases = (
 				A94DABCF1879967600DE1AA8 /* Sources */,
 				A94DABD01879967600DE1AA8 /* Frameworks */,
@@ -194,14 +177,14 @@
 			);
 			dependencies = (
 			);
-			name = Redis;
+			name = DSRedis;
 			productName = Redis;
-			productReference = A94DABD31879967600DE1AA8 /* libRedis.a */;
+			productReference = A94DABD31879967600DE1AA8 /* libDSRedis.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A94DABE21879967700DE1AA8 /* RedisTests */ = {
+		A94DABE21879967700DE1AA8 /* DSRedisTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A94DABF91879967700DE1AA8 /* Build configuration list for PBXNativeTarget "RedisTests" */;
+			buildConfigurationList = A94DABF91879967700DE1AA8 /* Build configuration list for PBXNativeTarget "DSRedisTests" */;
 			buildPhases = (
 				A94DABDF1879967700DE1AA8 /* Sources */,
 				A94DABE01879967700DE1AA8 /* Frameworks */,
@@ -212,9 +195,9 @@
 			dependencies = (
 				A94DABEA1879967700DE1AA8 /* PBXTargetDependency */,
 			);
-			name = RedisTests;
+			name = DSRedisTests;
 			productName = RedisTests;
-			productReference = A94DABE31879967700DE1AA8 /* RedisTests.xctest */;
+			productReference = A94DABE31879967700DE1AA8 /* DSRedisTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -223,10 +206,10 @@
 		A94DABCB1879967600DE1AA8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = dictav;
 			};
-			buildConfigurationList = A94DABCE1879967600DE1AA8 /* Build configuration list for PBXProject "Redis" */;
+			buildConfigurationList = A94DABCE1879967600DE1AA8 /* Build configuration list for PBXProject "DSRedis" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -238,8 +221,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A94DABD21879967600DE1AA8 /* Redis */,
-				A94DABE21879967700DE1AA8 /* RedisTests */,
+				A94DABD21879967600DE1AA8 /* DSRedis */,
+				A94DABE21879967700DE1AA8 /* DSRedisTests */,
 			);
 		};
 /* End PBXProject section */
@@ -249,7 +232,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A94DABF11879967700DE1AA8 /* InfoPlist.strings in Resources */,
+				A9598E1118E90DFC00ECF4D9 /* DSRedisTests-Info.plist in Resources */,
+				A9598E1218E90DFC00ECF4D9 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A94DABDE1879967600DE1AA8 /* Redis.m in Sources */,
+				A91329B218E90E7E0039B81D /* DSRedis.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,12 +253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A92BE5751879A2AE0057B8F4 /* dict.c in Sources */,
-				A94DABF31879967700DE1AA8 /* ARedisTests.m in Sources */,
-				A92BE5511879A2810057B8F4 /* RedisScriptTests.m in Sources */,
 				A92BE57B1879A2AE0057B8F4 /* hiredis.c in Sources */,
-				A92BE5501879A2810057B8F4 /* RedisExistsTests.m in Sources */,
+				A9598E1418E90DFC00ECF4D9 /* RedisScriptTests.m in Sources */,
 				A92BE57F1879A2AE0057B8F4 /* sds.c in Sources */,
+				A9598E1018E90DFC00ECF4D9 /* ARedisTests.m in Sources */,
 				A92BE57D1879A2AE0057B8F4 /* net.c in Sources */,
+				A9598E1318E90DFC00ECF4D9 /* RedisExistsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,16 +267,16 @@
 /* Begin PBXTargetDependency section */
 		A94DABEA1879967700DE1AA8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A94DABD21879967600DE1AA8 /* Redis */;
+			target = A94DABD21879967600DE1AA8 /* DSRedis */;
 			targetProxy = A94DABE91879967700DE1AA8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A94DABEF1879967700DE1AA8 /* InfoPlist.strings */ = {
+		A9598E0C18E90DFC00ECF4D9 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A94DABF01879967700DE1AA8 /* en */,
+				A9598E0D18E90DFC00ECF4D9 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -304,7 +288,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -332,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -342,7 +325,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -364,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -375,9 +357,9 @@
 			buildSettings = {
 				DSTROOT = /tmp/Redis.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Redis/Redis-Prefix.pch";
+				GCC_PREFIX_HEADER = "DSRedis/DSRedis-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DSRedis;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -387,9 +369,9 @@
 			buildSettings = {
 				DSTROOT = /tmp/Redis.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Redis/Redis-Prefix.pch";
+				GCC_PREFIX_HEADER = "DSRedis/DSRedis-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DSRedis;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -397,21 +379,20 @@
 		A94DABFA1879967700DE1AA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Redis/Redis-Prefix.pch";
+				GCC_PREFIX_HEADER = "DSRedis/DSRedis-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 					"TEST=1",
 				);
-				INFOPLIST_FILE = "RedisTests/RedisTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "DSRedisTests/DSRedisTests-Info.plist";
+				PRODUCT_NAME = DSRedisTests;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -419,16 +400,15 @@
 		A94DABFB1879967700DE1AA8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Redis/Redis-Prefix.pch";
-				INFOPLIST_FILE = "RedisTests/RedisTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "DSRedis/DSRedis-Prefix.pch";
+				INFOPLIST_FILE = "DSRedisTests/DSRedisTests-Info.plist";
+				PRODUCT_NAME = DSRedisTests;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -436,7 +416,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A94DABCE1879967600DE1AA8 /* Build configuration list for PBXProject "Redis" */ = {
+		A94DABCE1879967600DE1AA8 /* Build configuration list for PBXProject "DSRedis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A94DABF41879967700DE1AA8 /* Debug */,
@@ -445,7 +425,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A94DABF61879967700DE1AA8 /* Build configuration list for PBXNativeTarget "Redis" */ = {
+		A94DABF61879967700DE1AA8 /* Build configuration list for PBXNativeTarget "DSRedis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A94DABF71879967700DE1AA8 /* Debug */,
@@ -454,7 +434,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A94DABF91879967700DE1AA8 /* Build configuration list for PBXNativeTarget "RedisTests" */ = {
+		A94DABF91879967700DE1AA8 /* Build configuration list for PBXNativeTarget "DSRedisTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A94DABFA1879967700DE1AA8 /* Debug */,
