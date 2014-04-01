@@ -6,19 +6,19 @@
 //  Copyright (c) 2013年 Abe Shintaro. All rights reserved.
 //
 
-#import "Redis.h"
+#import "DSRedis.h"
 #import "hiredis.h"
 
 #ifndef Log
 #define Log(__FORMAT__, ...) NSLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #endif
 
-@interface Redis ()
+@interface DSRedis ()
 //@property (nonatomic) redisContext *context;
 - (redisContext*)connectRedisServer:(NSString*)host port:(NSUInteger)port password:(NSString*)password;
 @end
 
-@implementation Redis
+@implementation DSRedis
 {
     //subscribe
     redisContext *_subscribeContext;
@@ -26,18 +26,18 @@
 }
 
 
-static Redis *sharedRedis;
-+ (Redis*)sharedRedis
+static DSRedis *sharedRedis;
++ (DSRedis*)sharedRedis
 {
     if (sharedRedis == nil) {
         @synchronized(self) {
-            sharedRedis = [Redis new];
+            sharedRedis = [DSRedis new];
         }
     }
     return sharedRedis;
 }
 
-+ (void)setSharedRedis:(Redis *)redis
++ (void)setSharedRedis:(DSRedis *)redis
 {
     sharedRedis = redis;
 }

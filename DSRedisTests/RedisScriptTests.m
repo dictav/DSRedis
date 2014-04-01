@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Redis.h"
+#import "DSRedis.h"
 
 @interface RedisScriptTests : XCTestCase
 
@@ -15,7 +15,7 @@
 
 @implementation RedisScriptTests
 
-static Redis *remoteRedis;
+static DSRedis *remoteRedis;
 - (void)setUp
 {
     [super setUp];
@@ -30,7 +30,7 @@ static Redis *remoteRedis;
 
 - (void)testExample
 {
-    Redis *redis = [Redis sharedRedis];
+    DSRedis *redis = [DSRedis sharedRedis];
     NSString *script = @"return 1";
     NSString *sha1 = [redis uploadScript:script];
     XCTAssertTrue([sha1 isEqualToString: @"e0e1f9fabfc9d4800c877a703b823ac0578ff8db"]);

@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Redis.h"
+#import "DSRedis.h"
 
 @interface ARedisTests : XCTestCase
 
@@ -15,15 +15,15 @@
 
 @implementation ARedisTests
 {
-    Redis *redis;
+    DSRedis *redis;
 }
 
 - (void)setUp
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    redis = [[Redis alloc] initWithServer:@"localhost" port:11235 password:nil];
-    [Redis setSharedRedis:redis];
+    redis = [[DSRedis alloc] initWithServer:@"localhost" port:11235 password:nil];
+    [DSRedis setSharedRedis:redis];
 }
 
 - (void)tearDown
