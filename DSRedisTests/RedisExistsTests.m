@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Redis.h"
+#import "DSRedis.h"
 
 @interface RedisExistsTests : XCTestCase
 
@@ -15,15 +15,15 @@
 
 @implementation RedisExistsTests
 {
-    Redis *redis;
+    DSRedis *redis;
 }
 
-static Redis *remoteRedis;
+static DSRedis *remoteRedis;
 - (void)setUp
 {
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
-    redis = [Redis sharedRedis];
+    redis = [DSRedis sharedRedis];
 }
 
 - (void)tearDown

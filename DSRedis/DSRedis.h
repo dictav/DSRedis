@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Redis : NSObject
+@interface DSRedis : NSObject
 @property (nonatomic, retain) NSString *host;
 @property (nonatomic) NSUInteger port;
 @property (nonatomic, retain) NSString *password;
 
-+ (Redis*)sharedRedis;
-+ (void)setSharedRedis:(Redis*)redis;
++ (DSRedis*)sharedRedis;
++ (void)setSharedRedis:(DSRedis*)redis;
 
 // initialize
 - (id)initWithServer:(NSString*)host port:(NSUInteger)port password:(NSString*)password;

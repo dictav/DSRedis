@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A94DABD21879967600DE1AA8"
-               BuildableName = "libRedis.a"
-               BlueprintName = "Redis"
-               ReferencedContainer = "container:Redis.xcodeproj">
+               BuildableName = "libDSRedis.a"
+               BlueprintName = "DSRedis"
+               ReferencedContainer = "container:DSRedis.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -51,9 +51,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A94DABE21879967700DE1AA8"
-               BuildableName = "RedisTests.xctest"
-               BlueprintName = "RedisTests"
-               ReferencedContainer = "container:Redis.xcodeproj">
+               BuildableName = "DSRedisTests.xctest"
+               BlueprintName = "DSRedisTests"
+               ReferencedContainer = "container:DSRedis.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
