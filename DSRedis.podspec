@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "DSRedis"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Redis"
 
   s.description  = <<-DESC
-  					Redis
+  					DSRedis is hiredis wrapper for Objective-C
                    DESC
 
   s.homepage     = "http://github.com/dictav/DSRedis"
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = { "dictav" => "dictav@gmail.com" }
   s.social_media_url = "http://twitter.com/dictav"
 
-  s.source       = { :git => "https://github.com/dictav/DSRedis.git", :tag => "0.0.1", :submodules => true }
+  s.source       = { :git => "https://github.com/dictav/DSRedis.git", :tag => "0.0.2", :submodules => true }
   s.source_files  = ['DSRedis/DSRedis.{h,m}', 'hiredis/fmacros.h', 'hiredis/hiredis.{h,c}', 'hiredis/dict.{h,c}', 'hiredis/net.{h,c}', 'hiredis/sds.{h,c}']
 
   s.requires_arc  = true
