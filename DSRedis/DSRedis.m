@@ -15,6 +15,7 @@
 
 @interface DSRedis ()
 //@property (nonatomic) redisContext *context;
+@property (nonatomic) dispatch_queue_t queue;
 - (redisContext*)connectRedisServer:(NSString*)host port:(NSUInteger)port password:(NSString*)password;
 @end
 
@@ -29,11 +30,16 @@
 static DSRedis *sharedRedis;
 + (DSRedis*)sharedRedis
 {
-    if (sharedRedis == nil) {
-        @synchronized(self) {
-            sharedRedis = [DSRedis new];
-        }
-    }
+    static dispatch_queue_t q;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        q = dispatch_queue_create("com.dictav.dsredis.shareinstance", NULL);
+    });
+    
+    dispatch_sync(q, ^{
+        sharedRedis = [DSRedis new];
+    });
+    
     return sharedRedis;
 }
 
@@ -56,33 +62,15 @@ static DSRedis *sharedRedis;
         _password = password;
         _subscribeContext = NULL;
         _subscribeKey = nil;
-        
+        _databaseNumber = @0;
+        _queue = dispatch_queue_create("com.dictav.dsredis", NULL);
+// TODO: Implent unsubscribe when the application is inactive
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(unsubscribe)
+//                                                     name:UIApplicationDidEnterBackgroundNotification
+//                                                   object:nil];
     }
     return self;
-}
-
-
-- (redisContext*)connectRedisServer:(NSString*)host port:(NSUInteger)port password:(NSString*)password
-{
-    redisContext *c = redisConnect([host UTF8String], port);
-    if (c->err) {
-        Log(@"ERROR!!!: %s", c->errstr);
-        redisFree(c);
-        return NULL;
-    }
-    
-    // Auth
-    if (c && password) {
-        redisReply *auth = redisCommand(c, "AUTH %s", [password UTF8String]);
-        if (auth->type == REDIS_REPLY_ERROR) {
-            Log(@"ERROR: %s", auth->str);
-            redisFree(c);
-            c = NULL;
-        }
-        freeReplyObject(auth);
-    }
-    
-    return c;
 }
 
 - (void)dealloc
@@ -92,29 +80,66 @@ static DSRedis *sharedRedis;
     }
 }
 
-- (id)sendCommand:(NSString*)command key:(NSString*)key value:(id)value
+
+- (redisContext*)connectRedisServer:(NSString*)host port:(NSUInteger)port password:(NSString*)password
 {
-    @synchronized(self) {
-        id rtn;
-        @try {
-            rtn = [self concealSendCommand:command key:key value:value];
-        }
-        @catch (NSException *exception) {
-            Log(@"redis send command error: %@\n command: %@\n key: %@\n value: %@", exception, command, key, value);
-            rtn = nil;
-        }
-        @finally {
-            return rtn;
+    redisContext *c = redisConnect([host UTF8String], (int)port);
+    if (c->err) {
+        Log(@"ERROR could not connect server: %s", c->errstr);
+        redisFree(c);
+        return NULL;
+    }
+    
+    // Auth
+    if (c && password) {
+        redisReply *auth = redisCommand(c, "AUTH %s", [password UTF8String]);
+        if (auth) {
+            if (auth->type == REDIS_REPLY_ERROR) {
+                Log(@"ERROR could not auth: %s", auth->str);
+                redisFree(c);
+                c = NULL;
+            }
+            freeReplyObject(auth);
         }
     }
+    
+    return c;
+}
+
+- (id)sendCommand:(NSString*)command key:(NSString*)key value:(id)value
+{
+    __block id rtn;
+    dispatch_sync(_queue, ^{
+        rtn = [self trySendCommand:command key:key value:value];
+    });
+    
+    return rtn;
+}
+
+- (id)trySendCommand:(NSString*)command key:(NSString*)key value:(id)value
+{
+    id rtn;
+    @try {
+        rtn = [self concealSendCommand:command key:key value:value];
+    }
+    @catch (NSException *exception) {
+        Log(@"redis send command error: %@\n command: %@\n key: %@\n value: %@", exception, command, key, value);
+        rtn = nil;
+    }
+    @finally {
+        return rtn;
+    }
+    
 }
 
 - (id)concealSendCommand:(NSString*)command key:(NSString*)key value:(id)value
 {
     // simulate network
+#ifndef TEST
     if ([_host isEqualToString:@"localhost"]) {
-        [NSThread sleepForTimeInterval:0.3];
+        [NSThread sleepForTimeInterval:0.03];
     }
+#endif
     
     redisContext *context;
     context = [self connectRedisServer:_host port:_port password:_password];
@@ -125,6 +150,9 @@ static DSRedis *sharedRedis;
     
     
     redisReply *reply;
+    if (![_databaseNumber isEqualToNumber:@0]) {
+        redisCommand(context, "SELECT %d", _databaseNumber.integerValue);
+    }
     if ([value isKindOfClass:[NSString class]]) {
         reply = redisCommand(context, "%s %s %s",
                              [command UTF8String], [key UTF8String], [value UTF8String]);
@@ -135,7 +163,7 @@ static DSRedis *sharedRedis;
         
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *argList = [@[command, key] arrayByAddingObjectsFromArray:value];
-        int argc = argList.count;
+        NSUInteger argc = argList.count;
         const char *argv[argc];
         size_t argvlen[argc];
         
@@ -160,7 +188,7 @@ static DSRedis *sharedRedis;
             c++;
         }
         
-        reply = redisCommandArgv(context, argc, argv, argvlen);
+        reply = redisCommandArgv(context, (int)argc, argv, argvlen);
         
     } else if(key != nil) {
         reply = redisCommand(context, "%s %s",
@@ -175,7 +203,7 @@ static DSRedis *sharedRedis;
     }
     
     if (reply->type == REDIS_REPLY_ERROR) {
-        Log(@"ERROR!! %s, command:%@, key:%@, value:%@", reply->str, command,key,value);
+        Log(@"ERROR %s, command:%@, key:%@, value:%@", reply->str, command,key,value);
     }
     
     id rtn;
@@ -187,13 +215,6 @@ static DSRedis *sharedRedis;
 }
 
 - (id)objectFromReply:(redisReply*)reply
-{
-    @synchronized (self){
-        return [self concealObjectFromReply:reply];
-    }
-}
-
-- (id)concealObjectFromReply:(redisReply*)reply
 {
     id rtn = nil;
     NSData *data = [NSData dataWithBytes:reply->str length:reply->len];
@@ -212,7 +233,11 @@ static DSRedis *sharedRedis;
         case REDIS_REPLY_ARRAY:
             rtn = [NSMutableArray new];
             for (int n=0; n < reply->elements; n++) {
-                [rtn addObject:[self objectFromReply:reply->element[n]]];
+                id obj = [self objectFromReply:reply->element[n]];
+                if (obj == nil) {
+                    obj = [NSNull null];
+                }
+                [rtn addObject:obj];
             }
             break;
         case REDIS_REPLY_NIL:
@@ -267,18 +292,31 @@ static DSRedis *sharedRedis;
 - (id)addValue:(id)value forKey:(NSString*)key
 {
     NSAssert((key && value), @"require key and value");
-    return [self sendCommand:@"sadd" key:key value:value];
+    return [self addValues:@[value] forKey:key];
+}
+
+- (id)addValues:(NSArray *)values forKey:(NSString *)key
+{
+    NSAssert((key && values && values.count > 0), @"require key and value");
+    return [self sendCommand:@"sadd" key:key value:values];
 }
 
 - (id)addValue:(id)value withScore:(NSNumber*)score forKey:(NSString*)key
 {
     NSAssert((key && value && score), @"require key and value");
-    return [self sendCommand:@"zadd" key:key value:value];
+    return [self sendCommand:@"zadd" key:key value:@[score, value]];
 }
 - (NSNumber*)incrementForKey:(NSString *)key
 {
     NSAssert(key, @"require key");
     return [self sendCommand:@"incr" key:key value:nil];
+}
+
+- (NSNumber*)incrementObject:(id)stringOrData score:(NSNumber*)score forKey:(NSString*)key
+{
+    NSAssert(key && stringOrData, @"require key and object");
+    if (score == nil) { score = @1; }
+    return [self sendCommand:@"zincrby" key:key value:@[[score stringValue], stringOrData]];
 }
 
 - (NSArray*)allKeys:(NSString*)key
@@ -307,6 +345,20 @@ static DSRedis *sharedRedis;
     return [NSSet setWithArray:members];
 }
 
+// hget,hmget
+- (NSDictionary*)dictionaryForKey:(NSString *)key subKeys:(NSArray *)subKeys
+{
+    NSAssert(key && subKeys && subKeys.count > 0, @"require key");
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    NSArray *array = [self sendCommand:@"hmget" key:key value:subKeys];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        dict[ subKeys[idx] ] = obj;
+    }];
+    
+    return dict;
+}
+
+// hgetall
 - (NSDictionary*)dictionaryForKey:(NSString *)key
 {
     NSAssert(key, @"require key");
@@ -323,6 +375,31 @@ static DSRedis *sharedRedis;
     
     return dict;
 }
+
+- (NSDictionary*)scoresForKey:(NSString *)key withRange:(NSRange)range
+{
+    NSAssert(key, @"require key");
+    // get scores
+    NSNumber *start = @(range.location);
+    NSNumber *end = @(range.location + range.length -1);
+    NSArray *scores = [self sendCommand:@"zrevrange" key:key value:@[start,end,@"withscores"]];
+    
+    // make dictionary
+    NSMutableArray *keys = [NSMutableArray new];
+    NSMutableArray *values = [NSMutableArray new];
+    [scores enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx % 2 == 0) {
+            [keys addObject:obj];
+        }
+        else {
+            [values addObject:obj];
+        }
+    }];
+    
+    return [NSDictionary dictionaryWithObjects:values forKeys:keys];
+}
+
+#pragma mark -
 
 - (NSString*)uploadScript:(NSString *)script
 {
@@ -347,10 +424,38 @@ static DSRedis *sharedRedis;
     return [self sendCommand:@"evalsha" key:sha value:vlist];
 }
 
-- (void)deleteObjectForKey:(NSString *)key
+#pragma mark - DELETE
+// delete object
+- (id)deleteObjectForKey:(NSString *)key
 {
-    [self sendCommand:@"del" key:key value:nil];
+    NSAssert(key, @"require key");
+    return [self sendCommand:@"del" key:key value:nil];
 }
+
+// srem
+- (id)removeObject:(id)value forKey:(NSString*)key
+{
+    NSAssert(key && value, @"require key and value");
+    return [self sendCommand:@"srem" key:key value:value];
+}
+
+// hdel
+- (id)removeObjectForDictionaryKey:(NSString*)subKey forKey:(NSString*)key
+{
+    NSAssert(key && subKey, @"require key and subKey");
+    return [self sendCommand:@"hdel" key:key value:subKey];
+}
+
+// zrem
+
+#pragma mark -
+- (BOOL)moveMember:(id)value fromKey:(NSString *)fromKey toKey:(NSString *)toKey
+{
+    NSAssert(value && fromKey && toKey, @"require keys and value");
+    id rtn = [self sendCommand:@"smove" key:fromKey value:@[toKey,value]];
+    return [rtn isEqualToNumber:@1];
+}
+#pragma mark -
 
 - (NSNumber*)setExpireDate:(NSDate *)date forKey:(NSString *)key
 {
@@ -360,22 +465,26 @@ static DSRedis *sharedRedis;
     return [self sendCommand:@"expire" key:key value:value];
 }
 
-- (void)publishValue:(id)stringOrData forKey:(NSString*)key
+- (NSNumber*)publishValue:(id)stringOrData forKey:(NSString*)key
 {
     NSAssert((key && stringOrData), @"require key and value");
-    [self sendCommand:@"publish" key:key value:stringOrData];
+    return [self sendCommand:@"publish" key:key value:stringOrData];
 }
-
+static BOOL isSubscribing = NO;
 - (void)subscribeForKey:(NSString*)key withBlock:(void (^)(id object))block
 {
     // Prepare context
-    if (_subscribeContext) {
+    if (_subscribeContext != NULL) {
+        isSubscribing = YES;
+        if (_subscribeKey == nil) {
+            _subscribeKey = key;
+        }
         Log(@"already subscribing");
         return;
     }
     _subscribeContext = [self connectRedisServer:_host
-                                           port:_port
-                                       password:_password];
+                                            port:_port
+                                        password:_password];
     if (_subscribeContext == NULL) {
         Log(@"cannot connect redis server: %@", _host);
         return;
@@ -386,32 +495,54 @@ static DSRedis *sharedRedis;
     NSString *command = [NSString stringWithFormat:@"SUBSCRIBE %@", _subscribeKey];
     
     redisReply *reply = redisCommand(_subscribeContext, [command UTF8String]);
+    if (reply == NULL) {
+        Log(@"Error cannot subscribe");
+        return;
+    }
     freeReplyObject(reply); // this is need
-    while(redisGetReply(_subscribeContext, (void **)&reply) == REDIS_OK) {
-        NSArray *rtn = [self objectFromReply:reply];
+    
+    isSubscribing = YES;
+    while(_subscribeContext && isSubscribing
+          && redisGetReply(_subscribeContext, (void **)&reply) == REDIS_OK) {
+        __block NSArray *rtn;
+        dispatch_sync(_queue, ^{
+            rtn = [self objectFromReply:reply];
+        });
         block(rtn.lastObject);
         freeReplyObject(reply);
     }
+    Log(@"leave from subsribing loop");
+    
+    if (_subscribeContext != NULL) {
+        Log(@"Send unsubscribe");
+        reply = redisCommand(_subscribeContext, "UNSUBSCRIBE", [_subscribeKey UTF8String]);
+        if (reply) {
+            freeReplyObject(reply); // this is need
+        }
+        redisFree(_subscribeContext);
+        _subscribeContext = NULL;
+    }
+    
+    // finish
+    _subscribeKey = nil;
 }
 
-- (void)unsubscribe;
+- (void)unsubscribe
 {
-    if (_subscribeContext ) {
-        if ( _subscribeContext->flags | REDIS_CONNECTED) {
-            @synchronized (self) {
-                redisCommand(_subscribeContext, "UNSUBSCRIBE", [_subscribeKey UTF8String]);
-                redisFree(_subscribeContext);
-            }
-        }
-        _subscribeContext = NULL;
-        _subscribeKey = nil;
+    if (isSubscribing == NO) {
+        return;
+    }
+    
+    isSubscribing = NO;
+    if (_subscribeKey) {
+        [self publishValue:@"" forKey:_subscribeKey];
     }
 }
 
 #pragma mark -
 - (BOOL)hasKey:(NSString *)key
 {
-    assert(key);
+    NSAssert(key, @"Error key is nil");
     
     NSNumber *rtn = [self sendCommand:@"exists" key:key value:nil];
     return [rtn boolValue];
@@ -419,8 +550,7 @@ static DSRedis *sharedRedis;
 
 - (BOOL)hasMember:(id)object forKey:(NSString *)key
 {
-    assert(object);
-    assert(key);
+    NSAssert(object && key, @"Error key or objetct are nil: {key=%@,object=%@}", key, object);
     
     NSNumber *rtn = [self sendCommand:@"sismember" key:key value:object];
     return [rtn boolValue];
@@ -428,11 +558,107 @@ static DSRedis *sharedRedis;
 
 - (BOOL)hasDictionaryKey:(NSString *)dictKey forKey:(NSString *)key
 {
-    assert(dictKey);
-    assert(key);
+    NSAssert(dictKey && key, @"Error key or dictKey are nil: {key=%@,dictKey=%@}", key, dictKey);
     
     NSNumber *rtn = [self sendCommand:@"hexists" key:key value:dictKey];
     return [rtn boolValue];
+}
+
+#pragma mark -
+- (void)scanForKey:(NSString *)key type:(DSRedisType)type usingBlock:(void (^)(id, id, BOOL *))block
+{
+    [self scanForKey:key pattern:Nil type:type count:0 usingBlock:block];
+}
+
+- (void)scanForKey:(NSString *)key pattern:(NSString *)pattern type:(DSRedisType)type count:(NSInteger)count usingBlock:(void (^)(id, id, BOOL *))block
+{
+    // setup command
+    NSString* cmd;
+    NSMutableArray *params = [NSMutableArray new];
+    if (key == nil) {
+        cmd = @"scan";
+        key = @"0";
+    }
+    else {
+        switch ((NSInteger)type) {
+            case DSRedisTypeHash:
+                cmd = @"hscan";
+                break;
+            case DSRedisTypeSet:
+                cmd = @"sscan";
+                break;
+            case DSRedisTypeScore:
+                cmd = @"zscan";
+                break;
+            default:
+                return;
+        }
+        [params addObject:@"0"];
+    }
+    
+    if (pattern) {
+        [params addObject:@"MATCH"];
+        [params addObject:pattern];
+    }
+    
+    if (count) {
+        [params addObject:@"COUNT"];
+        [params addObject:[@(count) stringValue]];
+    }
+    
+    //
+    __block BOOL scanStop = NO;
+    while (!scanStop) {
+        // scan command return array
+        // example for scan and sscan)
+        // ["32",
+        //  [ obj1, obj2, obj3, ...] ]
+        // example for hscan)
+        // ["32",
+        //  [ [idx1, obj1], [idx2, obj2], [idx3, obj3], ...] ]
+        // example for zscan)
+        // ["32",
+        //  [ [obj1, score1], [obj2, score2], [obj3, score3], ...] ]
+        
+        NSArray *ret = [self sendCommand:cmd key:key value:params];
+        if (ret == nil) {
+            break;
+        }
+        // set next key
+        key = ret.firstObject;
+        
+        // start scan
+        NSEnumerator *enumrator = [ret.lastObject objectEnumerator];
+        
+        id obj1, obj2;
+        do {
+            obj1 = [enumrator nextObject];
+            obj2 = [enumrator nextObject];
+            switch (type) {
+                case DSRedisTypeScore:
+                case DSRedisTypeHash:
+                    if (obj1 && obj2) { block(obj2, obj1, &scanStop); }
+                    break;
+                default:
+                    if (obj1) { block(obj1, nil, &scanStop); }
+                    if (obj2) { block(obj2, nil, &scanStop); }
+                    break;
+            }
+            if (scanStop) {
+                return;
+            }
+            
+        } while (obj1 != nil);
+        
+        scanStop = [key isEqualToString:@"0"];
+    }
+    
+}
+
+// flushall
+- (void)flushall
+{
+    [self sendCommand:@"flushall" key:nil value:nil];
 }
 
 @end

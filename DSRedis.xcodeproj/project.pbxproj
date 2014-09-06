@@ -22,6 +22,7 @@
 		A9598E1218E90DFC00ECF4D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9598E0C18E90DFC00ECF4D9 /* InfoPlist.strings */; };
 		A9598E1318E90DFC00ECF4D9 /* RedisExistsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */; };
 		A9598E1418E90DFC00ECF4D9 /* RedisScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9598E0F18E90DFC00ECF4D9 /* RedisScriptTests.m */; };
+		A9E1E21D19BAF5A000D922C5 /* RedisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E1E21C19BAF5A000D922C5 /* RedisTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		A9598E0D18E90DFC00ECF4D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisExistsTests.m; sourceTree = "<group>"; };
 		A9598E0F18E90DFC00ECF4D9 /* RedisScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisScriptTests.m; sourceTree = "<group>"; };
+		A9E1E21C19BAF5A000D922C5 /* RedisTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedisTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A9598E0A18E90DFC00ECF4D9 /* ARedisTests.m */,
+				A9E1E21C19BAF5A000D922C5 /* RedisTests.m */,
 				A9598E0B18E90DFC00ECF4D9 /* DSRedisTests-Info.plist */,
 				A9598E0C18E90DFC00ECF4D9 /* InfoPlist.strings */,
 				A9598E0E18E90DFC00ECF4D9 /* RedisExistsTests.m */,
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A92BE5751879A2AE0057B8F4 /* dict.c in Sources */,
+				A9E1E21D19BAF5A000D922C5 /* RedisTests.m in Sources */,
 				A92BE57B1879A2AE0057B8F4 /* hiredis.c in Sources */,
 				A9598E1418E90DFC00ECF4D9 /* RedisScriptTests.m in Sources */,
 				A92BE57F1879A2AE0057B8F4 /* sds.c in Sources */,
