@@ -37,7 +37,9 @@ static DSRedis *sharedRedis;
     });
     
     dispatch_sync(q, ^{
-        sharedRedis = [DSRedis new];
+        if (sharedRedis == nil) {
+            sharedRedis = [DSRedis new];
+        }
     });
     
     return sharedRedis;
