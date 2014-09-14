@@ -217,4 +217,19 @@ static DSRedis *redis;
     [redis deleteObjectForKey:key1];
     [redis deleteObjectForKey:key2];
 }
+
+- (void)testZincrment
+{
+    NSString *key= @"myset1";
+    NSString *member= @"myset2";
+    redis.databaseNumber = @9;
+    
+    // prepare values
+    id rtn;
+    rtn = [redis incrementObject:member score:@1 forKey:key];
+    XCTAssertTrue([rtn isEqualToNumber:@1]);
+    
+    rtn = [redis scoreForKey:key member:member];
+    XCTAssertTrue([rtn isEqualToNumber:@1]);
+}
 @end

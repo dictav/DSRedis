@@ -316,7 +316,27 @@ static DSRedis *sharedRedis;
 {
     NSAssert(key && stringOrData, @"require key and object");
     if (score == nil) { score = @1; }
-    return [self sendCommand:@"zincrby" key:key value:@[[score stringValue], stringOrData]];
+    id rtn = [self sendCommand:@"zincrby" key:key value:@[[score stringValue], stringOrData]];
+    if (rtn) {
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+
+        rtn = [f numberFromString:rtn];
+    }
+    return rtn;
+}
+
+- (NSNumber*)scoreForKey:(NSString *)key member:(NSString *)member
+{
+    NSAssert(key && member, @"require key and member");
+    id rtn = [self sendCommand:@"zscore" key:key value:member];
+    if (rtn) {
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        
+        rtn = [f numberFromString:rtn];
+    }
+    return rtn;
 }
 
 - (NSArray*)allKeys:(NSString*)key

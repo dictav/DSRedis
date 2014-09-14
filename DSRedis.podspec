@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DSRedis"
-  s.version      = "0.0.4"
+  s.version      = "0.0.7"
   s.summary      = "Redis"
 
   s.description  = <<-DESC

@@ -59,6 +59,9 @@ typedef enum {
 // zinc
 - (NSNumber*)incrementObject:(id)stringOrData score:(NSNumber*)score forKey:(NSString*)key;
 
+// zscore
+- (NSNumber*)scoreForKey:(NSString*)key member:(NSString*)member;
+
 // expire
 - (NSNumber*)setExpireDate:(NSDate*)date forKey:(NSString*)key;
 
