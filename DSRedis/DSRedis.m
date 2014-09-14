@@ -387,12 +387,14 @@ static DSRedis *sharedRedis;
     // make dictionary
     NSMutableArray *keys = [NSMutableArray new];
     NSMutableArray *values = [NSMutableArray new];
-    [scores enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [scores enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
         if (idx % 2 == 0) {
             [keys addObject:obj];
         }
         else {
-            [values addObject:obj];
+            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+            [f setNumberStyle:NSNumberFormatterDecimalStyle];
+            [values addObject:[f numberFromString:obj]];
         }
     }];
     
